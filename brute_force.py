@@ -8,11 +8,20 @@ alunos de Engenharia de Computacao da Universidade Federal do Ceara
 
 Apenas caracteres ASCII, nao UTF-8
 '''
+import random
 
-def gera_senha(min, max, ultima_senha):
-	
+def titulos():
+	titulos = ['jovem', 'ser humano', 'Bob Esponja', 'Cyndy Lauper', 'Lois Lane', 'Bob Dylan', 'André Matos', 'Kate Pierson', 'Cazalbé de Nóbrega da Praça é Nossa', 'Dona Florinda', 'Professor Linguiça', 'Elo Perdido', 'Buchudim', 'meu Pleonasmo Vicioso']
+	return random.choice(titulos)
 
-def incrementa_caractere(senha, posicao):
+def msg_erro():
+	msgs_erro = ['Vou fingir que nem vi', 'Vá estudar', 'Por favor, só me chame se for coisa séria', 'Dá proxima vez eu me formato pra te deixar na merda', 'Eu queria ser formatado pra você não fazer mais essas coisas comigo', 'Queria ser útil, mas você não colabora']
+	return random.choice(msgs_erro)
+
+def dados_senha(s):
+	print(s + ' - len = '+str(len(s)))
+
+def incrementa_caractere(senha, posicao = 0):
 	senha = list(senha)
 	if(ord(senha[posicao])+1 < 127): #até 126 que é ~
 		senha[posicao] = chr(ord(senha[posicao])+1)
@@ -29,9 +38,22 @@ def incrementa_caractere(senha, posicao):
 	senha = "".join(senha)
 	return senha
 
-s = incrementa_caractere('}~~', 0)
-print(s + ' - len = '+str(len(s)))
-s = incrementa_caractere(s, 0)
-print(s + ' - len = '+str(len(s)))
-s = incrementa_caractere(s, 0)
-print(s + ' - len = '+str(len(s)))
+def gera_senha(max, min = 1, senha = '' ):
+	#se inseriu mínimo, deseja então começar sem senha
+	if(min<=0):
+		print("Parâmetro de entrada inválido, "+titulos())
+		print(msg_erro())
+	if(min > 1):
+		return (' '*min) #primeira senha. fazer o que?
+	#problemas com tamanho de senha mínimo resolvidos
+	s = incrementa_caractere(senha)
+	return s
+
+s = incrementa_caractere('}~~')
+dados_senha(s)
+s = incrementa_caractere(s)
+dados_senha(s)
+s = incrementa_caractere(s)
+dados_senha(s)
+
+dados_senha(gera_senha(5,5))
